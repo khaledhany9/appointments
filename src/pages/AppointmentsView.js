@@ -22,7 +22,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
-import { appointments } from '../demo-data/appointments';
+// import { appointments } from '../demo-data/appointments';
 
 import Datepicker from '../components/Datepicker'
 import Navbar from '../components/Navbar';
@@ -42,7 +42,13 @@ const styles = theme => ({
 class AppointmentsView extends React.PureComponent {
   constructor(props) {
     super(props);
-    console.log(appointments)
+    let appointments = localStorage.getItem("appointments")
+    if (appointments !== null) {
+        appointments = JSON.parse(appointments);
+    } else {
+        appointments = [];
+    }
+
     this.state = {
       data: appointments,
       currentDate: new Date(),
@@ -136,11 +142,12 @@ class AppointmentsView extends React.PureComponent {
   }
 
   commitDeletedAppointment() {
+    const { data, deletedAppointmentId } = this.state;
+    const nextData = data.filter(appointment => appointment.id !== deletedAppointmentId);
     this.setState((state) => {
-      const { data, deletedAppointmentId } = state;
-      const nextData = data.filter(appointment => appointment.id !== deletedAppointmentId);
-
       return { data: nextData, deletedAppointmentId: null };
+    }, () => {
+        this.setLocalStorageItems(nextData)
     });
     this.toggleConfirmationVisible();
   }
@@ -156,14 +163,20 @@ class AppointmentsView extends React.PureComponent {
         data = data.map(appointment => (
           changed[appointment.id] ? { ...appointment, ...changed[appointment.id] } : appointment));
       }
-      if (deleted !== undefined) {
-        this.setDeletedAppointmentId(deleted);
-        this.toggleConfirmationVisible();
-      }
+
       return { data, addedAppointment: {} };
+    }, () => {
+        if (deleted !== undefined) {
+          this.setDeletedAppointmentId(deleted);
+          this.toggleConfirmationVisible();
+        }
+        this.setLocalStorageItems(this.state)
     });
   }
   
+  setLocalStorageItems = (data) => {
+    localStorage.setItem("appointments", JSON.stringify(data))
+  }
 
   changeCurrentDate = (newCurrentDate) => {
       this.setState({

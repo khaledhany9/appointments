@@ -3,7 +3,7 @@ import {
     Appointments,
   } from '@devexpress/dx-react-scheduler-material-ui';
 
-const AppointmentCard = (props) => {console.log(props);
+const AppointmentCard = (props) => {
     return(
     <Appointments.AppointmentContent
       {...props}
