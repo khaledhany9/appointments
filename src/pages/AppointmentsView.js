@@ -27,6 +27,7 @@ import { appointments } from '../demo-data/appointments';
 import Datepicker from '../components/Datepicker'
 import Navbar from '../components/Navbar';
 import AppointmentFormContainer from '../components/AppointmentFormContainerBasic'
+import AppointmentCard from './../components/AppointmentCard';
 
 
 
@@ -41,9 +42,10 @@ const styles = theme => ({
 class AppointmentsView extends React.PureComponent {
   constructor(props) {
     super(props);
+    console.log(appointments)
     this.state = {
       data: appointments,
-      currentDate: '2018-06-27',
+      currentDate: new Date(),
       confirmationVisible: false,
       editingFormVisible: false,
       deletedAppointmentId: undefined,
@@ -161,7 +163,13 @@ class AppointmentsView extends React.PureComponent {
       return { data, addedAppointment: {} };
     });
   }
+  
 
+  changeCurrentDate = (newCurrentDate) => {
+      this.setState({
+          currentDate: newCurrentDate
+      })
+  }
 
 
   render() {
@@ -180,8 +188,7 @@ class AppointmentsView extends React.PureComponent {
       <Paper>
         <Navbar />
         
-        <Datepicker />
-
+        <Datepicker changeCurrentDate={this.changeCurrentDate} />
         <Scheduler
           data={data}
           height={660}
@@ -195,12 +202,14 @@ class AppointmentsView extends React.PureComponent {
             onAddedAppointmentChange={this.onAddedAppointmentChange}
           />
           <DayView
-            startDayHour={9}
-            endDayHour={14}
+            // startDayHour={9}
+            // endDayHour={14}
           />
           <AllDayPanel />
           <EditRecurrenceMenu />
-          <Appointments />
+          <Appointments
+        appointmentContentComponent={AppointmentCard}
+             />
           <AppointmentTooltip
             showOpenButton
             showCloseButton

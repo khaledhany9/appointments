@@ -20,12 +20,13 @@ const styles = theme => ({
 
 class Datepicker extends React.Component {
     state = {
-        selectedDate: new Date('2014-08-18T21:11:54'),
+        selectedDate: new Date(),
     }
     handleDateChange = (date) => {
         this.setState({
           selectedDate: date
         })
+        this.props.changeCurrentDate(date)
       };
     render() {
         const { classes } = this.props;

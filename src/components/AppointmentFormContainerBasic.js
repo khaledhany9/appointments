@@ -200,12 +200,12 @@ class AppointmentFormContainerBasic extends React.PureComponent {
                   />
                 </MuiPickersUtilsProvider>
               </div>
-              <div className={classes.wrapper}>
+              {/* <div className={classes.wrapper}>
                 <LocationOn className={classes.icon} color="action" />
                 <TextField
                   {...textEditorProps('location')}
                 />
-              </div>
+              </div> */}
               <div className={classes.wrapper}>
                 <Notes className={classes.icon} color="action" />
                 <TextField
