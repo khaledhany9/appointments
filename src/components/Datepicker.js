@@ -8,6 +8,43 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 import { withStyles } from '@material-ui/styles';
+import { createMuiTheme } from "@material-ui/core";
+import { ThemeProvider } from "@material-ui/styles";
+
+const datepickerTheme = createMuiTheme({
+  overrides: {
+    MuiInputBase: {
+      root: {
+        color: 'white',
+        border: '0'
+      },
+      input: {
+        height: '10px',
+      },
+    },
+    MuiOutlinedInput: {
+      root: {
+        backgroundColor: "#8282fe",
+        borderRadius: '50px',
+
+      },
+    },
+    MuiIconButton: {
+      root: {
+        color: 'inherit'
+      },
+    },
+
+    MuiFormControl: {
+      marginNormal: {
+        marginTop: '0',
+        marginBottom: '0'
+      },
+    },
+
+
+  },
+});
 
 
 
@@ -32,14 +69,12 @@ class Datepicker extends React.Component {
         const { classes } = this.props;
         return(
             <div className={classes.root}>
-                <Grid container spacing={3}>
-                <Grid item xs={2}/>
-                <Grid item xs={8} style={{textAlign: "center"}}>
+               <ThemeProvider theme={datepickerTheme}>
                 <MuiPickersUtilsProvider utils={DateFnsUtils} >
                     <KeyboardDatePicker
+                    inputVariant="outlined"
+                    label={false}
                     margin="normal"
-                    id="date-picker-dialog"
-                    label="Date picker dialog"
                     format="MM/dd/yyyy"
                     value={this.state.selectedDate}
                     onChange={this.handleDateChange}
@@ -48,9 +83,7 @@ class Datepicker extends React.Component {
                     }}
                     />
                 </MuiPickersUtilsProvider>
-                    </Grid>
-                    <Grid item xs={3}/>
-                </Grid>
+                </ThemeProvider>
                 </div>
         )
     }
