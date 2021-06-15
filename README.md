@@ -1,26 +1,23 @@
-# Create React App example
+# React Appointments App
 
 ## How to use
 
-Download the example [or clone the repo](https://github.com/mui-org/material-ui):
+1- Clone the repo
 
-```sh
-curl https://codeload.github.com/mui-org/material-ui/tar.gz/master | tar -xz --strip=2 material-ui-master/examples/create-react-app
-cd create-react-app
-```
-
-Install it and run:
-
+2- Run the following command to install dependancies
 ```sh
 npm install
+```
+3- Run the following command to start development server
+
+```sh
 npm start
 ```
 
-or:
 
-[![Edit on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/mui-org/material-ui/tree/master/examples/create-react-app)
+## Libraries used
 
-## The idea behind the example
-
-This example demonstrates how you can use [Create React App](https://github.com/facebookincubator/create-react-app).
-# Appointment
+- [React](https://reactjs.org/)
+- [Material UI](https://material-ui.com/)
+- [Material UI Pickers](https://material-ui-pickers.dev/)
+- [React Scheduler](https://devexpress.github.io/devextreme-reactive/react/scheduler/docs/guides/getting-started/)
